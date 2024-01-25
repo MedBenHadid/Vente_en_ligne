@@ -13,4 +13,43 @@ class orderController extends Controller
         $orders = Orders::all();
         return OrderResource::collection($orders);
     }
+
+
+    public function addOrder(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'user_id' => 'required|exists:users,id',
+        'total_amount' => 'required|numeric',
+        'date' => 'required|date',
+    ]);
+
+    $order = Orders::create($request->all());
+
+    return new OrderResource($order);
+}
+
+public function updateOrder(Request $request, $orderId)
+{
+    $order = Orders::findOrFail($orderId);
+
+    $request->validate([
+        'name' => 'required',
+        'user_id' => 'required|exists:users,id',
+        'total_amount' => 'required|numeric',
+        'date' => 'required|date',
+    ]);
+
+    $order->update($request->all());
+
+    return new OrderResource($order);
+}
+
+public function deleteOrder($orderId)
+{
+    $order = Orders::findOrFail($orderId);
+    $order->delete();
+
+    return response()->json(['message' => 'Order deleted successfully']);
+}
 }
