@@ -35,7 +35,6 @@ class AuthController extends Controller
         $password = $request->password;
         $user = User::where('name', $request['name'])->first();
         if (isset($user)) {
-            // $decrypted_password = decrypt($user->password);
             if ($password == $user->password) {
                 $token = $user->createToken('access_token')->plainTextToken;
                 return response()->json(['user' => new UserResource($user), 'token' => $token]);
@@ -46,6 +45,7 @@ class AuthController extends Controller
             return response('errors.invalid_name', 404);
         }
     }
+    
     public function logOut(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
