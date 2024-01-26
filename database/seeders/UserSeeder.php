@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
         $user = new User();
         $user->name = 'Oumaima Boutighane';
         $user->password = 'azerty123';
+        $user->is_admin = true;
         $user->save();
 
     }

@@ -45,9 +45,9 @@ public function updateOrder(Request $request, $orderId)
     return new OrderResource($order);
 }
 
-public function deleteOrder($orderId)
+public function deleteOrder(Orders $order)
 {
-    $order = Orders::findOrFail($orderId);
+    $order = Orders::findOrFail($order);
     $order->delete();
 
     return response()->json(['message' => 'Order deleted successfully']);
