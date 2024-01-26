@@ -25,9 +25,8 @@ public function addPanier(Request $request)
     return new PanierResource($panier);
 }
 
-public function updatePanier(Request $request, $panierId)
+public function updatePanier(Request $request, Panier $panier)
 {
-    $panier = Panier::findOrFail($panierId);
 
     $request->validate([
         'user_id' => 'required|exists:users,id',
@@ -38,9 +37,8 @@ public function updatePanier(Request $request, $panierId)
     return new PanierResource($panier);
 }
 
-public function deletePanier($panierId)
+public function deletePanier($panier)
 {
-    $panier = Panier::findOrFail($panierId);
     $panier->delete();
 
     return response()->json($panier, 201);

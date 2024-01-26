@@ -18,25 +18,25 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('log-out', [AuthController::class, 'logOut']);
 
 
     Route::post('add-order', [OrderController::class, 'addOrder']);
-    Route::ppost('update-order', [OrderController::class, 'updateOrder']);
-    Route::delete('delete-order/{orderId}', [OrderController::class, 'deleteOrder']);
+    Route::post('update-order', [OrderController::class, 'updateOrder']);
+    Route::delete('delete-order/{order}', [OrderController::class, 'deleteOrder']);
     Route::get('get-orders', [orderController::class, 'getOrder']);
 
     Route::delete('delete-panier/{panier}', [PanierController::class, 'destroy']);
     Route::post('add-panier', [PanierController::class, 'addPanier']);
-    Route::post('update-panier/{panierId}', [PanierController::class, 'updatePanier']);
+    Route::post('update-panier/{panier}', [PanierController::class, 'updatePanier']);
     Route::get('get-paniers', [PanierController::class, 'getAllPaniers']);
 
 
     Route::get('/api/products/category/{categoryId}', [ProductController::class, 'getByCategory']);
     Route::get('/api/products', [ProductController::class, 'index']);
 
-    return $request->user();
+    // return $request->user();
 });
 Route::get('test-connection', function () {
     return true;
