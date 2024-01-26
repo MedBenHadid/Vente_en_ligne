@@ -31,6 +31,8 @@ class AuthController extends Controller
     }
     public function signIn(Request $request)
     {
+        $name = $request->name;
+
         $password = $request->password;
         $user = User::where('name', $request['name'])->first();
         if (isset($user)) {

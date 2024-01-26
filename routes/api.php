@@ -38,5 +38,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     return $request->user();
 });
+Route::get('test-connection', function () {
+    return true;
+});
 Route::post('sign-in', [AuthController::class, 'signIn']);
 Route::post('sign-up', [AuthController::class, 'signUp']);
