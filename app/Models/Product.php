@@ -14,7 +14,9 @@ class Product extends Model
         'categorie_id',
         'photo'
     ];
-
+    protected $with = [
+        'categorie'
+    ];
     public function categorie()
     {
         return $this->belongsTo(Categorie::class, 'categorie_id');

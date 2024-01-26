@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -31,13 +31,12 @@ class AuthController extends Controller
     }
     public function signIn(Request $request)
     {
-        $name = $request->name;
-
+       
         $password = $request->password;
         $user = User::where('name', $request['name'])->first();
         if (isset($user)) {
-            $decrypted_password = decrypt($user->password);
-            if ($password == $decrypted_password) {
+            // $decrypted_password = decrypt($user->password);
+            if ($password == $user->password) {
                 $token = $user->createToken('access_token')->plainTextToken;
                 return response()->json(['user' => new UserResource($user), 'token' => $token]);
             } else {
