@@ -15,10 +15,9 @@ class ProductController extends Controller
         return ProductResource::collection($products);
     }
 
-public function getallProduct()
-{
-    $products = Product::all();
-    return ProductResource::collection($products);
-}
-
+    public function getAllProduct()
+    {
+        $products = Product::all();
+        return ProductResource::collection($products);
+    }
 }
